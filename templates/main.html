@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="shortcut icon" href="{% static 'favicon.png' %}" type="image/x-icon" />
+
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <title>StudyBuddy - Choose your study partners here!</title>
+
+</head>
+<body>
+    
+    {% include "navbar.html" %}
+
+
+    {% for message in messages %}
+        <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
+          {{ message }}
+        </div>
+    {% endfor %}
+
+
+    {% block content %}
+        
+    {% endblock content %}
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

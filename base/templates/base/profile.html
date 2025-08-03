@@ -1,0 +1,60 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <main class="profile-page layout layout--3">
+        <div class="container">
+            <!-- Topics Start-->
+            {% include "base/topics_component.html" %}
+            <!-- Topics End -->
+
+            <!-- Room List Start -->
+            <div class="roomList">
+                <div class="profile">
+
+                    <div class="profile__avatar">
+                        <div class="avatar avatar--large active">
+                            {% if profile_user.avatar %}
+                                <img src="{{ profile_user.avatar.url }}" alt="{{ profile_user.username }}">
+                            {% else %}
+                                <img src="{% static 'images/avatar.svg' %}" alt="Default Avatar">
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="profile__info">
+
+                        <h3>{{profile_user.username}}</h3>
+                        <pre>@{{profile_user.username}}</pre>
+
+                        {% if request.user == profile_user %}
+                            <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>  
+                        {% endif %}
+                        
+                    </div>
+
+                    <div class="profile__about">
+                        <h3>About</h3>
+                        <p>
+                            {{ profile_user.bio|default:"No bio provided." }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="roomList__header">
+                    <div>
+                        <h2>Study Rooms Hosted by {{profile_user.username}}</a>
+                        </h2>
+                    </div>
+                </div>
+                {% include "base/feed_component.html" %}
+            </div>
+            <!-- Room List End -->
+
+        </div>
+    </main>
+
+
+{% endblock content %}
